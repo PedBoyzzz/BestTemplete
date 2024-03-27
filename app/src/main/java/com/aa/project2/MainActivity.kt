@@ -64,6 +64,7 @@ class MainActivity : AppCompatActivity(),ListAdapter.Listener {
         img = findViewById(R.id.img)
         val layoutManager = LinearLayoutManager(applicationContext)
         list.layoutManager = layoutManager
+        System.out.println("push")
         //imageFromFile()
 
         //MultipartBody.Part
