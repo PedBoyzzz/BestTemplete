@@ -23,6 +23,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
@@ -30,6 +31,7 @@ android {
     kotlinOptions {
         jvmTarget = '17'
     }
+
 }
 
 dependencies {
@@ -74,4 +76,9 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-common:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-runtime:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'com.google.android.gms:play-services-location:21.2.0'
+
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

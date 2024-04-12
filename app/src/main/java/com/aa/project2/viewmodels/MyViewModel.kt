@@ -64,7 +64,7 @@ class MyViewModel:ViewModel {
         val res2 = this.repostory.getModels2()
         res2.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({it->result.postValue(it)},{err->})
+            .subscribe({it->/*result.postValue(it)*/},{err->})
             //.subscribe( { it->println("----data size "+it.size)}, {})
         //แบบที่3 ท่า Retrofiltธรรมดา เรียกผ่าน CoroutineScope Method ของ Service มี ไม่ต้องมี Call แต่ function ต้องนำหน้าด้วย suspend
         CoroutineScope(Dispatchers.IO).launch {

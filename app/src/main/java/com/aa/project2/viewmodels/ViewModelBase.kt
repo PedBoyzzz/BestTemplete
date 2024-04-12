@@ -4,6 +4,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.aa.project2.models.Products
 import com.aa.project2.repostory.RepostoryBase
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,7 +32,7 @@ class ViewModelBase(val repostoryBase: RepostoryBase): ViewModel() {
         repostoryBase.getProducts().enqueue(object :Callback<Products>{
             override fun onResponse(call: Call<Products>, response: Response<Products>) {
                 System.out.println("onResponse "+ (response.body()?.products?.size))
-                result.postValue(response.body())
+               //result.postValue(response.body())
             }
 
             override fun onFailure(call: Call<Products>, t: Throwable) {
@@ -35,5 +40,13 @@ class ViewModelBase(val repostoryBase: RepostoryBase): ViewModel() {
             }
 
         })
+         repostoryBase.getProducts2().subscribeOn(Schedulers.io())
+             .observeOn(AndroidSchedulers.mainThread())
+             .subscribe({/*result.postValue(it)*/},{})
+         CoroutineScope(Dispatchers.IO).launch {
+            val res = repostoryBase.getProducts3()
+             System.out.println("onResponse3 = "+res.products.size)
+             result.postValue(res)
+         }
     }
 }

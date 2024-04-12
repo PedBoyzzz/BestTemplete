@@ -1,16 +1,20 @@
+
 pluginManagement {
     repositories {
         google()
         mavenCentral()
         gradlePluginPortal()
     }
+
 }
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://jitpack.io' }//สำหรับ MPChart ต้องใส่ตรงนี้
     }
 }
+
 rootProject.name = "Project2"
 include ':app'

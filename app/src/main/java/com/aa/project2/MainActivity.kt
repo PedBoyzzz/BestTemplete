@@ -6,9 +6,11 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.Settings
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -36,7 +38,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
 
-
+//Some error  abdroid java.lang.SecurityException: Specified package
 class MainActivity : AppCompatActivity(),ListAdapter.Listener {
     lateinit var myViewModel: MyViewModel
     lateinit var myViewModel2:ViewModelBase
@@ -45,26 +47,53 @@ class MainActivity : AppCompatActivity(),ListAdapter.Listener {
     lateinit var img:ImageView
     lateinit var list:RecyclerView
     lateinit var adapter:ListAdapter
-    lateinit var myList:ArrayList<String>
-    fun myList(list:List<String>){
-        for(item in list){
-
-        }
-    }
+    lateinit var searchView: SearchView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setViewModels()
-        myList = ArrayList<String>()
-        myList.add("Niwat")
-        myList(myList)
         testCoroutine()
         tv = findViewById(R.id.tv)
         list = findViewById(R.id.list)
         img = findViewById(R.id.img)
+        searchView = findViewById(R.id.search)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                println("onQueryTextSubmit")
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                println("onQueryTextChange")
+                adapter.filter.filter(newText)
+               return false
+            }
+        })
+
         val layoutManager = LinearLayoutManager(applicationContext)
         list.layoutManager = layoutManager
         System.out.println("push")
+
+        val homeBt:ImageButton = findViewById(R.id.home_icon)
+        //homeBt.requestFocus()
+        homeBt.setOnClickListener {
+            homeBt.requestFocus()
+        }
+        val about:ImageButton = findViewById(R.id.about_icon)
+        about.setOnClickListener {
+            about.requestFocus()
+        }
+        //about.requestFocus()
+        val mapBtn:ImageButton = findViewById(R.id.location_icon)
+        mapBtn.setOnClickListener {
+            val intent = Intent(this, MapViewActivity::class.java)
+            startActivity(intent)
+        }
+        val chartBtn:ImageButton = findViewById(R.id.chart_icon)
+        chartBtn.setOnClickListener {
+            val intent = Intent(this, ChartActivity::class.java)
+            startActivity(intent)
+        }
         //imageFromFile()
 
         //MultipartBody.Part
@@ -158,6 +187,8 @@ class MainActivity : AppCompatActivity(),ListAdapter.Listener {
         val myBitmap = BitmapFactory.decodeFile(file.getAbsolutePath())
         img.setImageBitmap(myBitmap)
         System.out.println("image w = "+myBitmap.width)
+
+
     }
     fun upload(){
         val sd = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
@@ -241,6 +272,7 @@ class MainActivity : AppCompatActivity(),ListAdapter.Listener {
        myViewModel.loadData()
         myViewModel.result.observe(this,{
             println("-----result len = "+it.size)
+
         })
 
         myViewModel2 = ViewModelProviders.of(
@@ -258,6 +290,7 @@ class MainActivity : AppCompatActivity(),ListAdapter.Listener {
         ).get(UploadViewModel::class.java)
 
         test()
+
     }
     fun test(){
         GlobalScope.launch {

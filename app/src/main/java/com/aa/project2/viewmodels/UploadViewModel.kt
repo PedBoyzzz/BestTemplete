@@ -16,7 +16,7 @@ import java.io.File
 
 class UploadViewModel(val repostory: UploadRepostory):ViewModel(){
     init {
-        upload2({it-> })
+       // upload2({it-> })
     }
 
     fun upload2(result:(ResponseBody)->Unit) {
