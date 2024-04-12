@@ -1,1 +1,2 @@
-<img width="1409" alt="Pasted Graphic 2" src="https://github.com/PedBoyzzz/BestTemplete/assets/161984272/6316c5c6-3e94-4810-98c8-d5bec54538a8">
+
+<img width="1409" alt="Pasted Graphic" src="https://github.com/PedBoyzzz/BestTemplete/assets/161984272/aa648ce6-8f17-4493-b9b5-bd63ae8ced81">
