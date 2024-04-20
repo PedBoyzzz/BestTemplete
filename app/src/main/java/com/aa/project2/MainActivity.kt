@@ -51,6 +51,7 @@ class MainActivity : AppCompatActivity(),ListAdapter.Listener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        System.out.println("MMMMMMMM")
         setViewModels()
         testCoroutine()
         tv = findViewById(R.id.tv)
