@@ -52,7 +52,6 @@ class MainActivity : AppCompatActivity(),ListAdapter.Listener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         System.out.println("MMMMMMMM")
-        System.out.println("MMMMMMMM2")
         setViewModels()
         testCoroutine()
         tv = findViewById(R.id.tv)
